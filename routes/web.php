@@ -20,6 +20,10 @@ Route::get('articles/{article}', function (App\Article $article) {
     return view('articles')->with('article', $article);
 });
 
+Route::get('articles-vue/{article}', function ($articleId) {
+    return view('articles-vue')->with('articleId', $articleId);
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
