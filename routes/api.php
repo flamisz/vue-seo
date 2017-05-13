@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('article', function () {
     return App\Article::find(request('article_id'));
 });
+
+Route::get('comments', function () {
+    return App\Comment::where('article_id', request('article_id'))->with('owner')->get();
+});

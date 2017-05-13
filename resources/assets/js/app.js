@@ -16,6 +16,7 @@ window.Vue = require('vue');
  */
 
 Vue.component('v-article', require('./components/Article.vue'));
+Vue.component('comment', require('./components/Comment.vue'));
 
 const app = new Vue({
     el: '#app'

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <v-article prop-article-id="{{ $articleId }}"></v-article>
+        <v-article article-id="{{ $articleId }}"></v-article>
     </div>
 </div>
 @endsection

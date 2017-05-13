@@ -786,6 +786,7 @@ window.Vue = __webpack_require__(37);
  */
 
 Vue.component('v-article', __webpack_require__(34));
+Vue.component('comment', __webpack_require__(49));
 
 var app = new Vue({
   el: '#app'
@@ -1656,14 +1657,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['propArticleId'],
+    props: ['articleId'],
 
     data: function data() {
         return {
-            articleId: this.propArticleId,
-            article: []
+            article: [],
+            comments: []
         };
     },
 
@@ -1678,6 +1685,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }).then(function (response) {
             return _this.article = response.data;
+        });
+
+        axios.get('/api/comments', {
+            params: {
+                article_id: this.articleId
+            }
+        }).then(function (response) {
+            return _this.comments = response.data;
         });
     }
 });
@@ -31679,7 +31694,7 @@ var Component = __webpack_require__(35)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/zoltanf/dev/valet/vue-seo/resources/assets/js/components/Article.vue"
+Component.options.__file = "/Users/zoltanflamis/dev/valet/vue-seo/resources/assets/js/components/Article.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Article.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -31761,8 +31776,6 @@ module.exports = function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _vm._m(0)
-},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "container"
   }, [_c('div', {
@@ -31771,9 +31784,20 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "panel panel-default"
   }, [_c('div', {
     staticClass: "panel-heading"
-  }), _vm._v(" "), _c('div', {
+  }, [_vm._v(_vm._s(_vm.article.title))]), _vm._v(" "), _c('div', {
     staticClass: "panel-body"
-  })])])])
+  }, [_vm._v(_vm._s(_vm.article.body))])])]), _vm._v(" "), _vm._m(0), _vm._v(" "), _vm._l((_vm.comments), function(comment) {
+    return _c('comment', {
+      key: comment.id,
+      attrs: {
+        "comment": comment
+      }
+    })
+  })], 2)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-8 col-md-offset-2"
+  }, [_c('h3', [_vm._v("Comments")])])
 }]}
 module.exports.render._withStripped = true
 if (false) {
@@ -41516,6 +41540,98 @@ module.exports = function(module) {
 __webpack_require__(8);
 module.exports = __webpack_require__(9);
 
+
+/***/ }),
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['comment'],
+
+    mounted: function mounted() {
+        console.log('Comment mounted.');
+    }
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(35)(
+  /* script */
+  __webpack_require__(48),
+  /* template */
+  __webpack_require__(50),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "/Users/zoltanflamis/dev/valet/vue-seo/resources/assets/js/components/Comment.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] Comment.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-64a1d911", Component.options)
+  } else {
+    hotAPI.reload("data-v-64a1d911", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "col-md-8 col-md-offset-2"
+  }, [_c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v(_vm._s(_vm.comment.owner.name))]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_vm._v("\n            " + _vm._s(_vm.comment.body) + "\n        ")])])])
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-64a1d911", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
